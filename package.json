@@ -1,0 +1,21 @@
+{
+  "name": "course-catalog-test-task",
+  "version": "1.0.0",
+  "description": "Responsive course catalog with filtering and search",
+  "main": "index.html",
+  "scripts": {
+    "scss": "sass src/styles.scss src/styles.css",
+    "watch": "sass --watch src/styles.scss src/styles.css"
+  },
+  "keywords": [
+    "html",
+    "scss",
+    "bem",
+    "vanilla-js"
+  ],
+  "license": "ISC",
+  "author": "Vladimir Yurevich <yurvovka@gmail.com>",
+  "devDependencies": {
+    "sass": "^1.94.2"
+  }
+}

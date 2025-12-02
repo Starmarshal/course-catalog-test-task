@@ -1,0 +1,625 @@
+/* CSS Variables for colors and font */
+:root {
+  --white: #fff;
+  --primary: #ff3f3a;
+  --secondary: #ffcf2d;
+  --success: #03cea4;
+  --danger: #ff4242;
+  --warning: #f89828;
+  --info: #5a87fc;
+  --gray-900: #1e212c;
+  --gray-800: #424551;
+  --gray-700: #787a80;
+  --gray-600: #9a9ca5;
+  --gray-500: #b3b7bc;
+  --gray-400: #d7dadd;
+  --gray-300: #e5e8ed;
+  --gray-200: #f4f5f6;
+  --gray-100: #f9f9f9;
+  --font-family: "Lato", sans-serif;
+}
+
+/* SCSS Variables */
+$base-width: 1920px;
+$container-width: 1230px;
+$course-card-width: 390px;
+$course-card-height: 438px;
+$course-image-height: 240px;
+
+/* Colors map for easy reference */
+$colors: (
+        white: var(--white),
+        primary: var(--primary),
+        secondary: var(--secondary),
+        success: var(--success),
+        danger: var(--danger),
+        warning: var(--warning),
+        info: var(--info),
+        gray-900: var(--gray-900),
+        gray-800: var(--gray-800),
+        gray-700: var(--gray-700),
+        gray-600: var(--gray-600),
+        gray-500: var(--gray-500),
+        gray-400: var(--gray-400),
+        gray-300: var(--gray-300),
+        gray-200: var(--gray-200),
+        gray-100: var(--gray-100)
+);
+
+$font-family: var(--font-family);
+$transition: 0.3s ease;
+
+/* Function to convert pixels to rem units */
+@function px-to-rem($px) {
+  @return calc($px / 16) * 1rem;
+}
+
+/* Function to convert pixels to vw units */
+@function px-to-vw($px) {
+  @return calc($px / $base-width * 100) * 1vw;
+}
+
+/* Function to convert pixels to percentage */
+@function px-to-percent($px, $base: $container-width) {
+  @return percentage($px / $base);
+}
+
+/* Desktop-first mixin */
+@mixin desktop-first {
+  @content;
+}
+
+/* Tablet responsive mixin */
+@mixin tablet {
+  @media (max-width: 1199px) {
+    @content;
+  }
+}
+
+/* Mobile responsive mixin */
+@mixin mobile {
+  @media (max-width: 767px) {
+    @content;
+  }
+}
+
+/* Small mobile responsive mixin */
+@mixin small-mobile {
+  @media (max-width: 479px) {
+    @content;
+  }
+}
+
+/* Reset default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+  font-family: $font-family;
+  color: map-get($colors, gray-900);
+  background-color: map-get($colors, white);
+  min-height: 100vh;
+  padding: px-to-rem(44) 0 px-to-rem(86) 0;
+}
+
+/* Main container */
+.container {
+  width: min(#{percentage(1230px / $container-width)}, 1230px);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+
+  @include tablet {
+    width: min(90%, 1230px);
+    padding: 0 px-to-rem(20);
+  }
+
+  @include mobile {
+    width: 100%;
+    padding: 0 px-to-rem(16);
+  }
+}
+
+/* Header section */
+.header {
+  width: px-to-percent(600px);
+  max-width: 600px;
+  height: px-to-rem(92);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: px-to-rem(8);
+  margin: 0 auto px-to-rem(85) auto;
+  text-align: center;
+
+  @include tablet {
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: px-to-rem(60);
+  }
+
+  @include mobile {
+    margin-bottom: px-to-rem(40);
+    height: auto;
+    padding: 0 px-to-rem(16);
+  }
+}
+
+/* Header subtitle */
+.header__subtitle {
+  font-family: $font-family;
+  font-weight: 700;
+  font-size: px-to-rem(16);
+  line-height: 150%;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: map-get($colors, gray-900);
+  width: 100%;
+
+  @include mobile {
+    font-size: px-to-rem(14);
+  }
+}
+
+/* Header main title */
+.header__title {
+  font-family: $font-family;
+  font-weight: 900;
+  font-size: px-to-rem(46);
+  line-height: 130%;
+  color: map-get($colors, gray-900);
+  width: 100%;
+
+  @include tablet {
+    font-size: px-to-rem(46);
+  }
+
+  @include mobile {
+    font-size: px-to-rem(28);
+  }
+}
+
+/* Controls section (filters + search) */
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: px-to-rem(60);
+
+  @include tablet {
+    flex-direction: column;
+    gap: px-to-rem(24);
+    align-items: stretch;
+  }
+
+  @include mobile {
+    margin-bottom: px-to-rem(40);
+    gap: px-to-rem(16);
+  }
+}
+
+/* Filters container */
+.filters {
+  display: flex;
+  gap: px-to-rem(12);
+  width: px-to-percent(813px);
+  max-width: 813px;
+  height: px-to-rem(46);
+
+  @include tablet {
+    width: 100%;
+    max-width: 100%;
+    flex-wrap: wrap;
+    height: auto;
+    justify-content: center;
+  }
+
+  @include mobile {
+    gap: px-to-rem(8);
+  }
+}
+
+/* Filter button styles */
+.filter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: px-to-rem(4);
+  padding: px-to-rem(10) px-to-rem(20);
+  height: px-to-rem(46);
+  min-width: fit-content;
+  font-family: $font-family;
+  font-weight: 700;
+  font-size: px-to-rem(16);
+  line-height: 160%;
+  color: map-get($colors, gray-600);
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all $transition;
+  white-space: nowrap;
+
+  @include tablet {
+    flex: 1;
+    min-width: px-to-rem(120);
+  }
+
+  @include mobile {
+    font-size: px-to-rem(14);
+    padding: px-to-rem(8) px-to-rem(12);
+    height: px-to-rem(40);
+  }
+
+  &:hover {
+    border: 1px solid map-get($colors, primary);
+    background: map-get($colors, primary);
+    color: map-get($colors, white);
+  }
+
+  /* Active filter state */
+  &--active {
+    border: 1px solid map-get($colors, primary);
+    color: map-get($colors, primary);
+
+    &:hover {
+      background: map-get($colors, primary);
+      color: map-get($colors, white);
+    }
+  }
+}
+
+/* Filter superscript (course count) */
+.filter sup {
+  font-family: var(--font-family);
+  font-weight: 900;
+  font-size: 0.625rem;
+  line-height: 150%;
+  text-align: center;
+  color: var(--gray-600);
+  margin-left: 0.25rem;
+  margin-bottom: 0.8125rem;
+  transition: color 0.3s ease;
+}
+
+.filter:hover sup {
+  color: var(--white);
+}
+
+.filter--active sup {
+  color: var(--primary);
+}
+
+.filter--active:hover sup {
+  color: var(--white);
+}
+
+@media (max-width: 767px) {
+  .filter sup {
+    font-size: 0.5rem;
+  }
+}
+
+/* Search container */
+.search {
+  position: relative;
+  width: px-to-rem(315);
+  height: px-to-rem(44);
+
+  @include tablet {
+    width: 100%;
+    max-width: px-to-rem(400);
+    align-self: center;
+  }
+
+  @include mobile {
+    height: px-to-rem(40);
+  }
+}
+
+/* Search input */
+.search__input {
+  width: 100%;
+  height: 100%;
+  padding: 0 px-to-rem(44) 0 px-to-rem(20);
+  border: 1px solid map-get($colors, gray-400);
+  border-radius: px-to-rem(4);
+  background: map-get($colors, white);
+  font-family: $font-family;
+  font-size: px-to-rem(16);
+  color: map-get($colors, gray-800);
+  outline: none;
+  transition: border-color $transition;
+
+  &:focus {
+    border-color: map-get($colors, primary);
+  }
+
+  &::placeholder {
+    color: map-get($colors, gray-600);
+  }
+
+  @include mobile {
+    font-size: px-to-rem(14);
+    padding: 0 px-to-rem(40) 0 px-to-rem(16);
+  }
+}
+
+/* Search icon */
+.search__icon {
+  position: absolute;
+  right: px-to-rem(20);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include mobile {
+    right: px-to-rem(16);
+  }
+}
+
+/* Courses grid */
+.courses {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: px-to-rem(30);
+  margin-bottom: px-to-rem(80);
+
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr);
+    gap: px-to-rem(24);
+    margin-bottom: px-to-rem(60);
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: px-to-rem(20);
+    margin-bottom: px-to-rem(40);
+  }
+}
+
+/* Course card */
+.course-card {
+  border: 1px solid map-get($colors, gray-300);
+  border-radius: px-to-rem(4);
+  width: 100%;
+  height: auto;
+  min-height: px-to-rem(438);
+  background: map-get($colors, white);
+  box-shadow: 0 px-to-rem(4) px-to-rem(4) px-to-rem(-4) rgba(30, 33, 44, 0.03),
+  0 px-to-rem(12) px-to-rem(10) px-to-rem(-6) rgba(154, 156, 165, 0.04),
+  0 px-to-rem(30) px-to-rem(24) px-to-rem(-10) rgba(154, 156, 165, 0.05),
+  0 px-to-rem(80) px-to-rem(80) px-to-rem(-20) rgba(154, 156, 165, 0.08);
+  padding: px-to-rem(24);
+  display: flex;
+  flex-direction: column;
+  transition: transform $transition, box-shadow $transition;
+  cursor: pointer;
+
+  @include tablet {
+    min-height: auto;
+    padding: px-to-rem(20);
+  }
+
+  @include mobile {
+    padding: px-to-rem(16);
+  }
+
+  &:hover {
+    transform: translateY(px-to-rem(-4));
+    box-shadow: 0 px-to-rem(8) px-to-rem(8) px-to-rem(-4) rgba(30, 33, 44, 0.05),
+    0 px-to-rem(20) px-to-rem(16) px-to-rem(-6) rgba(154, 156, 165, 0.06),
+    0 px-to-rem(40) px-to-rem(32) px-to-rem(-10) rgba(154, 156, 165, 0.08),
+    0 px-to-rem(100) px-to-rem(100) px-to-rem(-20) rgba(154, 156, 165, 0.12);
+  }
+}
+
+/* Course picture */
+.course-picture {
+  width: calc(100% + #{px-to-rem(48)});
+  height: px-to-rem(240);
+  object-fit: cover;
+  border-radius: px-to-rem(4) px-to-rem(4) 0 0;
+  margin: px-to-rem(-24) px-to-rem(-24) px-to-rem(20) px-to-rem(-24);
+
+  @include tablet {
+    height: px-to-rem(200);
+    margin: px-to-rem(-20) px-to-rem(-20) px-to-rem(16) px-to-rem(-20);
+    width: calc(100% + #{px-to-rem(40)});
+  }
+
+  @include mobile {
+    height: px-to-rem(180);
+    margin: px-to-rem(-16) px-to-rem(-16) px-to-rem(12) px-to-rem(-16);
+    width: calc(100% + #{px-to-rem(32)});
+  }
+}
+
+/* Course category badge */
+.course-card__category {
+  display: inline-block;
+  padding: px-to-rem(1) px-to-rem(8);
+  height: px-to-rem(23);
+  border-radius: px-to-rem(4);
+  font-family: $font-family;
+  font-weight: 400;
+  color: map-get($colors, white);
+  font-size: px-to-rem(14);
+  line-height: 150%;
+  margin-bottom: px-to-rem(20);
+  align-self: flex-start;
+
+  @include mobile {
+    font-size: px-to-rem(12);
+    margin-bottom: px-to-rem(16);
+    padding: px-to-rem(2) px-to-rem(6);
+    height: px-to-rem(20);
+  }
+}
+
+/* Category-specific colors */
+.course-card__category--marketing {
+  background: map-get($colors, success);
+}
+
+.course-card__category--management {
+  background: map-get($colors, info);
+}
+
+.course-card__category--hr {
+  background: map-get($colors, warning);
+}
+
+.course-card__category--design {
+  background: #f52f6e;
+}
+
+.course-card__category--development {
+  background: #7772f1;
+}
+
+/* Course title */
+.course-card__title {
+  font-family: $font-family;
+  font-weight: 700;
+  width: 100%;
+  font-size: px-to-rem(20);
+  line-height: 150%;
+  color: map-get($colors, gray-900);
+  margin-bottom: px-to-rem(20);
+
+  @include tablet {
+    font-size: px-to-rem(18);
+    margin-bottom: px-to-rem(16);
+  }
+
+  @include mobile {
+    font-size: px-to-rem(16);
+    margin-bottom: px-to-rem(12);
+  }
+}
+
+/* Course info (price and author) */
+.course-card__info {
+  display: flex;
+  align-items: center;
+  gap: px-to-rem(8);
+  font-family: $font-family;
+  font-size: px-to-rem(18);
+  line-height: 150%;
+  color: map-get($colors, gray-700);
+  font-weight: 400;
+
+  @include tablet {
+    font-size: px-to-rem(16);
+  }
+
+  @include mobile {
+    font-size: px-to-rem(14);
+    gap: px-to-rem(6);
+  }
+}
+
+/* Course price */
+.course-card__price {
+  font-family: $font-family;
+  font-weight: 700;
+  line-height: 150%;
+  color: map-get($colors, danger);
+}
+
+/* Separator between price and author */
+.course-card__separator {
+  color: map-get($colors, gray-500);
+}
+
+/* Course author */
+.course-card__author {
+  color: map-get($colors, gray-700);
+}
+
+/* Load more section */
+.load-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 0;
+}
+
+/* Load more button */
+.load-more__button {
+  display: flex;
+  align-items: center;
+  gap: px-to-rem(10);
+  width: auto;
+  height: px-to-rem(26);
+  font-family: $font-family;
+  font-weight: 700;
+  font-size: px-to-rem(16);
+  line-height: 160%;
+  color: map-get($colors, gray-800);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color $transition;
+
+  &:hover {
+    color: map-get($colors, primary);
+  }
+
+  @include mobile {
+    font-size: px-to-rem(14);
+    gap: px-to-rem(8);
+  }
+}
+
+/* No results message */
+.no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: px-to-rem(60);
+  font-family: $font-family;
+  font-weight: 700;
+  font-size: px-to-rem(20);
+  color: map-get($colors, gray-700);
+  display: none;
+
+  &.active {
+    display: block;
+  }
+
+  @include mobile {
+    padding: px-to-rem(40);
+    font-size: px-to-rem(18);
+  }
+}
+
+/* Course card visibility states */
+.course-card {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity $transition, transform $transition;
+
+  &.hidden {
+    opacity: 0;
+    transform: scale(0.9);
+    pointer-events: none;
+    position: absolute;
+    visibility: hidden;
+  }
+
+  &.visible {
+    opacity: 1;
+    transform: scale(1);
+    position: relative;
+    visibility: visible;
+  }
+}
