@@ -99,6 +99,7 @@ $transition: 0.3s ease;
 
 /* Body styles */
 body {
+  background-image: url('./assets/background.svg');
   font-family: $font-family;
   color: map-get($colors, gray-900);
   background-color: map-get($colors, white);
